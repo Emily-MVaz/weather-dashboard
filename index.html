@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="./Assets/style.css" />
+    <link rel="stylesheet" href="./assets/style.css" />
     <title>Weather Dashboard</title>
   </head>
 
@@ -16,53 +16,67 @@
       <h1 class="display-3 text-center ">Weather Dashboard</h1>
     </header>
 
-    <div class="row container-fluid bg-secondary">
+    <div class="row container-fluid">
       
-      <!-- Search section -->
-      <div class="col-md-2 bg-success">
-        <h2 class="display-4">Search for a City</h2>
-        <div class="active-cyan-3 active-cyan-4 mb-4">
-            <input class="" type="text" placeholder="Search" aria-label="Search">
+      <!-- Left side content -->
+      <div class="col-md-2">
+      
+        <!-- Search section -->
+        <div class="">
+          <h5 class="">Search for a City:</h5>
+          <div class="form-row active-cyan-3 active-cyan-4 mb-4">
+              <input class="" id="city-search" type="text" placeholder="Search Cities" aria-label="Search">
+              <button class="btn-rounded btn-sm my-0" id="search-button" type="submit"><i class="fas fa-search"></i></button>
+          </div>
+          <!-- ? ⬆️ How do i keep this on the left and insert table on the right -->
         </div>
-        <button class="btn-rounded btn-sm my-0" type="submit">Search</button>
-        <!-- ? ⬆️ How do i keep this on the left and insert table on the right -->
+
+        <!-- search history -->
+        <ul id="search-history"></ul>
+
+        <!-- clear history button -->
+        <a id="clear-history" href="#"></a>
       </div>
 
 
       <!-- ? how do I move all of this over a bit to the right-->
-      <!-- city weather info section -->
-      <div class="col-md-10 bg-danger" id="current-weather">
-        <h3 id="city">example</h3>
-        <p id="temp"></p>
-        <p id="wind"></p>
-        <p id="humidity"></p>
-        <p id="uv-index"></p>
-      </div>
+      <!-- Right side content -->
+      <div class="col-md-10 pt-2">
+
+        <!-- city weather info section -->
+        <div class="card m-3 col-md-12 d-none" id="current-weather">
+          <h3 id="city"></h3>
+          <p id="temp"></p>
+          <p id="wind"></p>
+          <p id="humidity"></p>
+          <p id="uv-index"></p>
+        </div>
 
 
-      <!-- 5 day forecast section -->
-      <div class="row bg-warning">
-        <div class="col-12 bg-info">
-          <h3>5 days</h3>
+        <!-- 5 day forecast section -->
+        <div class="row mt-3 d-none" id="five-days">
+          <div class="col-12">
+            <h3>5 day Forecast</h3>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 forecast"></div>
+          <div class="col-md-2 forecast"></div>
+          <div class="col-md-2 forecast"></div>
+          <div class="col-md-2 forecast"></div>
+          <div class="col-md-2 forecast"></div>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col-md-2 forecast"></div>
-        <div class="col-md-2 forecast"></div>
-        <div class="col-md-2 forecast"></div>
-        <div class="col-md-2 forecast"></div>
-        <div class="col-md-2 forecast"></div>
-      </div>
-
-
     </div>
 
 
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="./script.js"></script>
+    <script src="./assets/script.js"></script>
   </body>
 </html>
