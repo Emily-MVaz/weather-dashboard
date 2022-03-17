@@ -1,10 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="./Assets/style.css" />
+    <title>Weather Dashboard</title>
+  </head>
+
+  <body>
+    <header class="jumbotron bg-primary">
+      <h1 class="display-3 text-center ">Weather Dashboard</h1>
+    </header>
+
+    <div class="row container-fluid bg-secondary">
+      
+      <!-- Search section -->
+      <div class="col-md-2 bg-success">
+        <h2 class="display-4">Search for a City</h2>
+        <div class="active-cyan-3 active-cyan-4 mb-4">
+            <input class="" type="text" placeholder="Search" aria-label="Search">
+        </div>
+        <button class="btn-rounded btn-sm my-0" type="submit">Search</button>
+        <!-- ? ⬆️ How do i keep this on the left and insert table on the right -->
+      </div>
 
 
-<!-- * API Key: 1f424de6f8c55f73372510aac5d23b26-->
+      <!-- ? how do I move all of this over a bit to the right-->
+      <!-- city weather info section -->
+      <div class="col-md-10 bg-danger" id="current-weather">
+        <h3 id="city">example</h3>
+        <p id="temp"></p>
+        <p id="wind"></p>
+        <p id="humidity"></p>
+        <p id="uv-index"></p>
+      </div>
 
 
-<!--   comment -->
-<!-- * comment -->
-<!-- ! comment-->
-<!-- ? comment-->
-<!-- TODO: comment-->
+      <!-- 5 day forecast section -->
+      <div class="row bg-warning">
+        <div class="col-12 bg-info">
+          <h3>5 days</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2 forecast"></div>
+        <div class="col-md-2 forecast"></div>
+        <div class="col-md-2 forecast"></div>
+        <div class="col-md-2 forecast"></div>
+        <div class="col-md-2 forecast"></div>
+      </div>
+
+
+    </div>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
