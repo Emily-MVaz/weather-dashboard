@@ -19,7 +19,7 @@ Main Objective: The user can search for a city in the search bar and get the cit
 - When the user clicks a city in the search history then they are again presented with current and future conditions for that city
 ## Link
 
-[Link to finshed webpage](https://emily-mvaz.github.io/weather-dashboard/)
+[Link to finshed webpage]()
 
 
 ## Contributions
