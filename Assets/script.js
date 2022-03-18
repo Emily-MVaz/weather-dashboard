@@ -6,6 +6,7 @@ var searchHistoryList = [];
 // var currentCity = "";
 // var lastCity ="";
 
+
 // Get current weather conditions
 function currentConditions(city) {
 
@@ -21,7 +22,7 @@ function currentConditions(city) {
         url: queryURL,
         method: "GET"
     }).then(function(cityResponse) {
-      console.log(cityResponse);
+    //   console.log(cityResponse);
         
 
         $("#weather-info").css("display", "block");
@@ -30,7 +31,7 @@ function currentConditions(city) {
         var iconCode = cityResponse.weather[0].icon;
         var iconURL = `https://openweathermap.org/img/w/${iconCode}.png`;
 
-        console.log(cityResponse.weather[0]);
+        // console.log(cityResponse.weather[0]);
 
 
         // Display city weather info
@@ -56,7 +57,7 @@ function currentConditions(city) {
             method: "GET"
         })
         .then(function(uvResponse) {
-            console.log(uvResponse);
+            // console.log(uvResponse);
 
             var uvIndex = uvResponse.value;
             var uvIndexP = $(`
@@ -100,7 +101,7 @@ function futureConditions(lat, lon) {
         method: "GET"
     })
     .then(function(forecastResponse) {
-        console.log(forecastResponse);
+        // console.log(forecastResponse);
         $("#five-days").empty();
 
         for (let i = 0; i < 5; i ++) {
@@ -148,7 +149,7 @@ $("#search-button").on("click", function(event) {
     };
 
     localStorage.setItem("city", JSON.stringify(searchHistoryList));
-    console.log(searchHistoryList);
+    // console.log(searchHistoryList);
 });
 
 // Clickable history
@@ -165,7 +166,7 @@ $(document).ready(function() {
         var lastSearchedIndex = searchHistoryArr.length - 1;
         var lastSearchedCity = searchHistoryArr[lastSearchedIndex];
         currentConditions(lastSearchedCity);
-        console.log(`Last serched city: ${lastSearchedCity}`);
+        // console.log(`Last serched city: ${lastSearchedCity}`);
     }
 
 });
