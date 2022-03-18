@@ -20,7 +20,7 @@ var currentConditions = (event) => {
     fetch(queryURL)
     .then((response) => {
         return response.json();
-    })
+    }) 
 
     // Save city info to local storage
     .then((response) => {
