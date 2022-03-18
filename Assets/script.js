@@ -1,5 +1,5 @@
 // Global variables
-var apiKey = "1f424de6f8c55f73372510aac5d23b26";
+var APIKey = "1f424de6f8c55f73372510aac5d23b26";
 // TODO API key not working 400 error not sure why maybe add lon adn lat to link??
 var currentCity = "";
 var lastCity ="";
@@ -14,7 +14,7 @@ var currentConditions = (event) => {
     currentCity = $("#city-search").val();
 
     // Set up API for specific city 
-    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+    let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&APPID=" + APIKey;
 
     // Grab city weather from API
     fetch(queryURL)
@@ -26,9 +26,19 @@ var currentConditions = (event) => {
     .then((response) => {
         saveCity(city);
         
-        let weatherIcon = "https://openweathermap.org/img/wn/" + response.weather[0].icon + ".png";
+        let weatherIcon = "https://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
 
         
+
+
+        // Offset UTC timezone - using moment.js
+        let currentTimeUTC = response.dt;
+        let currentTimeZoneOffset = response.timezone;
+        let currentTimeZoneOffsetHours = currentTimeZoneOffset / 60 / 60;
+        let currentMoment = moment.unix(currentTimeUTC).utc().utcOffset(currentTimeZoneOffsetHours);
+
+
+
         // Time information
         // TODO: fix time info maybe different structure needed 
         // var currentCityDate = data.current.dt;
@@ -37,14 +47,15 @@ var currentConditions = (event) => {
         // currentDateEl.text(` (${currentCityDate}) `);
         // cityNameEl.append(currentDateEl);
 
-    
+
+
         // show list of cities searched
         cityList();
         // get 5 day forecast for city
         getForecast(event);
 
         // Display city weather info
-        let currentWeatherCard = `<h3>${response.name} ${currentCityDate}<img src="${weatherIcon}"></h3>
+        let currentWeatherCard = `<h3>${response.name} ${currentMoment.format("MM/DD/YYYY")}<img src="${weatherIcon}"></h3>
         <ul class="list-unstyled">
             <li>Temperature: ${response.main.temp}&#8457;</li> 
             <li>Humidity: ${response.main.humidity}%;</li> 
@@ -57,9 +68,12 @@ var currentConditions = (event) => {
         // UV Index lon and lat
         let latitude = response.coord.lat;
         let longitude = response.coord.lon;
-        let uvQuery = "api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon" + longitude + "&appid=" + apiKey;
+        let queryURL = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&APPID=" + APIKey;
 
-        fetch(uvQuery)
+        // queryURL = "https://cors-anywhere.herokuapp.com/" + queryURL;
+
+
+        fetch(queryURL)
         .then((response) => {
             return response.json();
         })
@@ -82,8 +96,50 @@ var currentConditions = (event) => {
 
 //5 day forecast function
 var getForecast = (event) => {
-    
+    let city = $("#city-search").val();
+
+    // Set up URL for API search using forecast search
+    let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&APPID=" + APIKey;
+
+    // Grab info from API
+    fetch(queryURL)
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+        // HTML template
+        let fiveDayForecastHTML = `
+        <h2>5-Day Forecast:</h2>
+        <div id="fiveDayForecastUl" class="d-inline-flex flex-wrap ">`;
+        // Loop over the 5 day forecast and build the template HTML using UTC offset and Open Weather Map icon
+        for (let i = 0; i < response.list.length; i++) {
+            let dayData = response.list[i];
+            let dayTimeUTC = dayData.dt;
+            let timeZoneOffset = response.city.timezone;
+            let timeZoneOffsetHours = timeZoneOffset / 60 / 60;
+            let thisMoment = moment.unix(dayTimeUTC).utc().utcOffset(timeZoneOffsetHours);
+            let iconURL = "https://openweathermap.org/img/w/" + dayData.weather[0].icon + ".png";
+            // Only displaying mid-day forecasts
+            if (thisMoment.format("HH:mm:ss") === "11:00:00" || thisMoment.format("HH:mm:ss") === "12:00:00" || thisMoment.format("HH:mm:ss") === "13:00:00") {
+                fiveDayForecastHTML += `
+                <div class="weather-card card m-2 p0">
+                    <ul class="list-unstyled p-3">
+                        <li>${thisMoment.format("MM/DD/YY")}</li>
+                        <li class="weather-icon"><img src="${iconURL}"></li>
+                        <li>Temp: ${dayData.main.temp}&#8457;</li>
+                        <br>
+                        <li>Humidity: ${dayData.main.humidity}%</li>
+                    </ul>
+                </div>`;
+            }
+        }
+        // Build the HTML template
+        fiveDayForecastHTML += `</div>`;
+        // Append the five-day forecast to the DOM
+        $('#five-days').html(fiveDayForecastHTML);
+    })
 }
+
 
 
 
