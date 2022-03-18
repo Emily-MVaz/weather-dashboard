@@ -4,7 +4,7 @@
 Create a Weather Dashboard displaying the current weather and future forecast of a searched city using the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api).
 ## Screenshots
 
-![Weather Dashboard Screenshot](./assets/weather-dashboard-screenshot.png)
+![Weather Dashboard Screenshot](./assets/images/weather-dashboard-screenshot.png)
 
 
 ## Objectives
