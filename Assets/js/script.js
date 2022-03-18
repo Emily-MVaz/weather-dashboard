@@ -104,7 +104,7 @@ function futureConditions(lat, lon) {
         // console.log(forecastResponse);
         $("#five-days").empty();
 
-        for (let i = 0; i < 5; i ++) {
+        for (let i = 1; i < 6; i ++) {
             var cityInfo = {
                 date: forecastResponse.daily[i].dt,
                 icon: forecastResponse.daily[i].weather[0].icon,
